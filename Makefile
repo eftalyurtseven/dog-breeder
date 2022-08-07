@@ -1,8 +1,12 @@
 ## Run Test Suite inside docker
-tests:
-	@docker-compose -f docker-compose.yml up --build --abort-on-container-exit
+unit-tests:
+	go tests -v -short ./...
 
 ## Run Integration Test
 ## Note: This command is intended to be executed within docker env
 integration-tests:
-	go test -v ./...
+	go test -run Integration ./...
+
+## Run Integration Test inside docker
+integration-tests-docker:
+	docker-compose up --build

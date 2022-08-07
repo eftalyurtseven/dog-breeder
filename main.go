@@ -29,12 +29,11 @@ func main() {
 	// flag parsing
 	flag.Parse()
 
-	addr := fmt.Sprintf("localhost:%d", *gRPCPort)
+	addr := fmt.Sprintf(":%d", *gRPCPort)
 	lis, err := net.Listen("tcp", addr)
 	if err != nil {
 		log.Fatalln("Failed to start server: %v", err)
 	}
-
 	// create grpc server that uses TLS
 	s := grpc.NewServer(
 		grpc.Creds(credentials.NewServerTLSFromCert(&insecure.Cert)),

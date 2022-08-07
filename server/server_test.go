@@ -63,7 +63,9 @@ var tests = []struct {
 func mockImageHTTPServer(expected []byte) *httptest.Server {
 	return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		w.Write(expected)
+		if _, err := w.Write(expected); err != nil {
+			panic(err)
+		}
 	}))
 }
 
@@ -72,7 +74,9 @@ func mockImageHTTPServer(expected []byte) *httptest.Server {
 func mockHTTPServer(status, imageSrvURI string) *httptest.Server {
 	return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(fmt.Sprintf(`{"message":"%s","status":"%s","code":0}`, imageSrvURI, status)))
+		if _, err := w.Write([]byte(fmt.Sprintf(`{"message":"%s","status":"%s","code":0}`, imageSrvURI, status))); err != nil {
+			panic(err)
+		}
 	}))
 }
 

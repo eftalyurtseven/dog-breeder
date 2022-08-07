@@ -9,7 +9,7 @@ services:
         - SERVICE=grpcserver
     ports:
       - "8081:8080"
-  client:
+  integration-tests:
     build: 
       context: ./
       dockerfile: ./docker/client/Dockerfile
