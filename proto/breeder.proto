@@ -1,0 +1,22 @@
+syntax="proto3";
+
+package breeder;
+option go_package = "./breeder";
+
+
+// Breeder is a service that can getting dog breed image from dog breed name.
+service Breeder {
+    // Search returns a dog breed image from dog breed name.
+    rpc Search (DogReq) returns (DogRes) {}
+}
+
+// The request message containing the dog breed name.
+message DogReq {
+    string breed = 1;
+}
+
+// The Response message containing the dog breed image and the status.
+message DogRes {
+    bool status = 1;
+    bytes image = 2;
+}
